@@ -1,6 +1,5 @@
 # PySide6_Calc
-![image](https://user-images.githubusercontent.com/79583622/176756679-1daf3f10-5b27-4f20-bbda-74833222077f.png)
-
+![изображение](https://user-images.githubusercontent.com/79583622/189980296-80623eb3-0556-4521-94a4-d3317eff2147.png)
 
 
 Simple GUI-Calc on the framework PySide6
