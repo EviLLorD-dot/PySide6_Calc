@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
+import os
 import sys
 import math
 
@@ -108,8 +108,10 @@ class MainWindow(QMainWindow):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
-    fsh = "dark.qss"
-    with open(fsh, "r") as ssh:
+    file_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
+    path_to_ssh = os.path.abspath(os.path.join(file_dir, 'dark.qss'))
+
+    with open(path_to_ssh, "r") as ssh:
         app.setStyleSheet(ssh.read())
 
     window = MainWindow()
