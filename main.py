@@ -1,8 +1,12 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 import sys
 import math
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 from ui_calc import Ui_w_calc
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -39,10 +43,9 @@ class MainWindow(QMainWindow):
         self.ui.btn_squar.clicked.connect(lambda: self.square())
         self.ui.btn_sqrt.clicked.connect(lambda: self.sqrt())
 
-
         self.ui.btn_equ.clicked.connect(lambda: self.equals())
 
-    #show from display
+    # show from display
     def click(self, input_el="0"):
         self.display(input_el)
 
@@ -66,27 +69,49 @@ class MainWindow(QMainWindow):
 
         self.ui.l_display.setText(text)
 
-    #solution
+    # solution
     def equals(self):
         input_text = self.ui.l_display.text()
-        output_text = eval(input_text)
+
+        try:
+            output_text = eval(input_text)
+        except SyntaxError:
+            output_text = 0
+
         self.ui.l_display.setText(str(output_text))
 
     def square(self):
         input_text = self.ui.l_display.text()
-        if not ('+' or '-' or '*' or '/') in input_text:
-            self.ui.l_display.setText(str(math.pow(float(input_text), 2)))
+
+        try:
+            output_text = math.pow(float(input_text), 2)
+        except SyntaxError:
+            output_text = 0
+        except ValueError:
+            output_text = 0
+
+        self.ui.l_display.setText(str(output_text))
 
     def sqrt(self):
         input_text = self.ui.l_display.text()
-        if not ('+' or '-' or '*' or '/') in input_text:
-            self.ui.l_display.setText(str(math.sqrt(float(input_text))))
+
+        try:
+            output_text = math.sqrt(float(input_text))
+        except SyntaxError:
+            output_text = 0
+        except ValueError:
+            output_text = 0
+
+        self.ui.l_display.setText(str(output_text))
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+
+    fsh = "dark.qss"
+    with open(fsh, "r") as ssh:
+        app.setStyleSheet(ssh.read())
+
     window = MainWindow()
     window.show()
-
     sys.exit(app.exec())
-
